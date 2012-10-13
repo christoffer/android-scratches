@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:waveview="http://schemas.android.com/apk/res/com.christofferklang"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:orientation="vertical">
@@ -12,6 +13,8 @@
 
     <com.christofferklang.WaveView android:id="@+id/waveSmall"
                                    android:clickable="true"
+                                   waveview:primaryColor="#99ff5476"
+                                   waveview:secondaryColor="#44ff5476"
                                    android:layout_width="fill_parent"
                                    android:layout_height="fill_parent" />
 
