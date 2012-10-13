@@ -1,0 +1,8 @@
+<resources>
+  <style name="scratch_header">
+    <item name="android:textSize">24dp</item>
+    <item name="android:color">@android:color/white</item>
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+  </style>
+</resources>
