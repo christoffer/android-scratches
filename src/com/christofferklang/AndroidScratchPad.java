@@ -22,13 +22,6 @@ public class AndroidScratchPad extends Activity
         }
       });
 
-      Button buttonHorizontalNumberPicker = (Button) findViewById(R.id.buttonHorizontalNumberPicker);
-      buttonHorizontalNumberPicker.setOnClickListener(new View.OnClickListener() {
-        @Override public void onClick(View view) {
-          startHorizontalNumberPicker();
-        }
-      });
-
       Button backgroundService = (Button) findViewById(R.id.buttonBackground);
       backgroundService.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View view) {
@@ -45,11 +38,4 @@ public class AndroidScratchPad extends Activity
     Intent startWaveView = new Intent(this, ActivityWaveView.class);
     startActivity(startWaveView);
   }
-
-  private void startHorizontalNumberPicker() {
-    Intent horizontalNumberPicker = new Intent(this, ActivityHorizontalNumberPicker.class);
-    startActivity(horizontalNumberPicker);
-  }
-
-
 }
