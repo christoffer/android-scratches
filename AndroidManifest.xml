@@ -12,5 +12,6 @@
             </intent-filter>
         </activity>
       <activity android:name=".ActivityWaveView" />
+      <activity android:name=".ActivityBackground" />
     </application>
 </manifest>

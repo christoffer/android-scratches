@@ -16,5 +16,11 @@
           android:layout_width="fill_parent"
           android:layout_height="wrap_content"
           android:text="WaveView" />
+
+  <Button
+    android:id="@+id/buttonBackground"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="BackgroundService" />
 </LinearLayout>
 
