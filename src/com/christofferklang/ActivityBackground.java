@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class ActivityBackground extends Activity {
   private static final String TAG = ActivityBackground.class.getName();
-  private TimerService mConnectedTimerService = null;
+  private TimerService mService = null;
 
   private static TextView textStatus;
 
@@ -28,46 +28,52 @@ public class ActivityBackground extends Activity {
     Log.d(TAG, "onStart()");
     Log.d(TAG, "(re-)Binding to service");
     Intent serviceIntent = new Intent(this, TimerService.class);
-    bindService(serviceIntent, mTimerServiceConnection, Context.BIND_AUTO_CREATE);
+    startService(serviceIntent);
+    bindService(serviceIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
   }
 
   @Override protected void onStop() {
     super.onStop();
     Log.d(TAG, "onStop()");
-    if(mConnectedTimerService == null) {
+    if(mService == null) {
       Log.d(TAG, "No service currently bound.");
     } else {
-      Log.d(TAG, "Disconnecting current bound service.");
-      unbindService(mTimerServiceConnection);
-      mTimerServiceConnection = null;
+      Log.d(TAG, "Unbinding from service.");
+
+      if(!mService.isRunning()) {
+        mService.stopSelf();
+      }
+
+      unbindService(mServiceConnection);
+      mService = null;
     }
   }
 
   @SuppressWarnings("UnusedParameters")
   public void onStartClicked(View button) {
     Log.d(TAG, "onStartClicked()");
-    if(mConnectedTimerService != null) {
-      mConnectedTimerService.startTimer();
-      textStatus.setText("Elapsed: " + mConnectedTimerService.getElapsed());
+    if(mService != null) {
+      mService.startTimer();
+      textStatus.setText("Elapsed: " + mService.getElapsed());
     }
   }
 
   @SuppressWarnings("UnusedParameters")
   public void onStopClicked(View button) {
     Log.d(TAG, "onStopClicked()");
-    if(mConnectedTimerService != null) {
-      final long elapsed = mConnectedTimerService.stopTimer();
+    if(mService != null) {
+      final long elapsed = mService.stopTimer();
       textStatus.setText("Ended at: " + elapsed);
     }
   }
 
   // Callback handler for the connection to the service
-  private ServiceConnection mTimerServiceConnection = new ServiceConnection() {
+  private ServiceConnection mServiceConnection = new ServiceConnection() {
     @Override public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
       Log.d(TAG, "onServiceConnected()");
       TimerService.LocalBinder binder = (TimerService.LocalBinder) iBinder;
       // Set the connected service
-      mConnectedTimerService = binder.getService();
+      mService = binder.getService();
 
       textStatus.setText("Connected");
     }
@@ -75,7 +81,7 @@ public class ActivityBackground extends Activity {
     @Override public void onServiceDisconnected(ComponentName componentName) {
       Log.d(TAG, "onServiceDisconnected()");
       // No longer connected to the service
-      mConnectedTimerService = null;
+      mService = null;
       textStatus.setText("Disconnected");
     }
   };
