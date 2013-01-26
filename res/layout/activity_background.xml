@@ -19,12 +19,14 @@
     android:layout_height="wrap_content"
     android:text="Start"
     android:id="@+id/buttonStart"
-    android:layout_gravity="right|center_vertical" />
+    android:layout_gravity="right|center_vertical"
+    android:onClick="onStartClicked" />
 
   <Button
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:text="Stop"
     android:id="@+id/buttonStop"
-    android:layout_gravity="center" />
+    android:layout_gravity="center"
+    android:onClick="onStopClicked" />
 </LinearLayout>

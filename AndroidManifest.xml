@@ -13,5 +13,6 @@
         </activity>
       <activity android:name=".ActivityWaveView" />
       <activity android:name=".ActivityBackground" />
+      <service android:name=".TimerService" />
     </application>
 </manifest>
